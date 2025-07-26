@@ -1,3 +1,5 @@
 .env
 app_lihat.py
 uploads
+__pycache__
+runtime.txt

@@ -30,3 +30,4 @@ PyMuPDF
 qdrant-client
 # grpcio-tools==1.59.0 --only-binary :all:
 grpcio-tools --only-binary :all:
+psycopg2-binary

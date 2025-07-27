@@ -118,15 +118,18 @@ text_splitter = RecursiveCharacterTextSplitter(chunk_size=1500, chunk_overlap=20
 # Configure database
 def get_db_connection():
     # db_name = os.getenv('DB_NAME', 'chatbot.susenas')
-    db_name = os.getenv('DB_NAME', os.getenv("MYSQL_DATABASE"))
-    print(f"Connecting to database: {db_name}")
-    return mysql.connector.connect(
-        host=os.getenv('DB_HOST', os.getenv("MYSQLHOST")),
-        user=os.getenv('DB_USER', os.getenv("MYSQLUSER")), 
-        password=os.getenv('DB_PASSWORD', os.getenv("MYSQLPASSWORD")),
-        database=db_name,
-        port=int(os.getenv('DB_PORT', os.getenv('MYSQLPORT')))
-    )
+    # db_name = os.getenv('DB_NAME', os.getenv("MYSQL_DATABASE"))
+    # print(f"Connecting to database: {db_name}")
+    # return mysql.connector.connect(
+    #     host=os.getenv('DB_HOST', os.getenv("MYSQLHOST")),
+    #     user=os.getenv('DB_USER', os.getenv("MYSQLUSER")), 
+    #     password=os.getenv('DB_PASSWORD', os.getenv("MYSQLPASSWORD")),
+    #     database=db_name,
+    #     port=int(os.getenv('DB_PORT', os.getenv('MYSQLPORT')))
+    # )
+    db_url = os.getenv('DATABASE_URL')  # kamu bisa set ini dari Neon
+    print(f"Connecting to database: {db_url}")
+    return psycopg2.connect(db_url)
 
 def process_documents_and_add_to_qdrant(vector_store, doc_generator, batch_size):
     batch = []
